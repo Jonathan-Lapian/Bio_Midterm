@@ -1,0 +1,30 @@
+.image-section {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.image {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.text-section {
+  flex: 2;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.stats h3 {
+  color: #ff5722; /* Orange for numbers */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stats p {
+  color: #6c757d; /* Dark gray for labels */
+  font-size: 16px;
+}

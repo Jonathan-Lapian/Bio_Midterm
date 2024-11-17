@@ -1,0 +1,43 @@
+.skills-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px; /* Add spacing between skill sections */
+  margin-top: 20px; /* Space between biography and skills */
+}
+
+.skills-section {
+  flex: 1;
+  min-width: 250px; /* Ensure the sections don't get too narrow */
+}
+
+.skills-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ff4500;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Add spacing between skill badges */
+}
+
+.skill-badge {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skill-badge:hover {
+  background-color: #ff4500;
+  color: #fff;
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,12 @@
+.contact-container {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.biography-section {
+  margin-bottom: 30px; /* Add spacing between biography and skills */
+}
