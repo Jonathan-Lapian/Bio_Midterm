@@ -5,7 +5,7 @@ const OrganizationalExperience = () => {
   // Define experiences directly in the component
   const experiences = [
     {
-      year: "2024",
+      year: "2024 ",
       organization: "Crew BEW 2024",
       position: "Member of EDITOR GEMA",
       details: [
