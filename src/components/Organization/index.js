@@ -13,6 +13,15 @@ const OrganizationalExperience = () => {
         "Became one of the committee CAMPUS DAY.",
       ],
     },
+    {
+      year: "2024 - Present ",
+      organization: "The Unklab Choir",
+      position: "Member of Multimedia ",
+      details: [
+        "Helping them with documentary and editing their videos.",
+        "Organizing their videos for anniversary.",
+      ],
+    },
   ];
 
   return (

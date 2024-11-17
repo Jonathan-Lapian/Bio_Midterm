@@ -5,7 +5,6 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./Body.css"; // Add custom CSS for scrollable styles
 
 const Body = ({ sliderRef }) => {
   // Slider settings
@@ -24,7 +23,7 @@ const Body = ({ sliderRef }) => {
       <div>
         <Home />
       </div>
-      <div className="scrollable-slide">
+      <div>
         <About />
       </div>
       <div>
