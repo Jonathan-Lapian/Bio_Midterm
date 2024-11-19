@@ -1,12 +1,45 @@
 .contact-container {
-  padding: 40px;
-  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.contact-title {
+  font-size: 2.5rem;
   color: #333;
-  line-height: 1.6;
-  font-size: 24px;
   margin-bottom: 10px;
 }
 
-.biography-section {
-  margin-bottom: 30px; /* Add spacing between biography and skills */
+.contact-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.icon {
+  text-decoration: none;
+  color: #555;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.5);
+}
+
+.icon.github:hover {
+  color: #333;
+}
+
+.icon.linkedin:hover {
+  color: #0077b5;
+}
+
+.icon.whatsapp:hover {
+  color: #25d366;
 }

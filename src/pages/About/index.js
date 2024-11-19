@@ -1,12 +1,14 @@
 import React from "react";
 import "./About.css";
-import { Skills, OrganizationExperience } from "../../components";
+import OrganizationalExperience from "../../components/Organization";
+import Skills from "../../components/molecule/Skills";
 
 const About = () => {
   return (
     <div className="about-container">
+      {/* Biography Section */}
       <div className="biography-section">
-        <h2 className="title">About Me</h2>
+        <h1 className="section-title">About Me</h1>
         <p>
           I am Jonathan Lapian, a passionate scholar who continuously strives
           for growth and excellence in God's name. With a strong foundation in
@@ -27,12 +29,12 @@ const About = () => {
           enjoy playing chess—a game that mirrors my passion for strategic
           thinking and continuous improvement.
         </p>
-        <p>
-          Through each challenge, I aim to grow as a professional and as an
-          individual, always guided by faith and a commitment to excellence.
-        </p>
       </div>
-      <OrganizationExperience />
+
+      {/* Organizational Experience Section */}
+      <OrganizationalExperience />
+
+      {/* Skills Section */}
       <Skills />
     </div>
   );

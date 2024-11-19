@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Header, Body, Footer } from "./components";
+import { Header, Body } from "./components";
 
 import "./App.css";
 
