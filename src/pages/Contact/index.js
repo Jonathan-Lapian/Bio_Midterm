@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import "./Contact.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,40 +9,68 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Contact = () => {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const profileRef = ref(db, "profile"); // Fetching from the 'profile' node
+
+    onValue(profileRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setProfile(snapshot.val());
+      } else {
+        console.error("No profile data found in database.");
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <p>Loading profile details...</p>;
+  }
+
   return (
     <div className="contact-container">
       <h1 className="contact-title">Get in Touch</h1>
+
       <p className="contact-subtitle">
         Feel free to connect with me through the platforms below!
       </p>
       <div className="icon-container">
-        <a
-          href="https://github.com/Jonathan-Lapian"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="icon github"
-          title="GitHub: Check out my projects"
-        >
-          <FontAwesomeIcon icon={faGithub} size="2x" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/jonathan-reinald-lapian-3b609a290"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="icon linkedin"
-          title="LinkedIn: Let's connect professionally"
-        >
-          <FontAwesomeIcon icon={faLinkedin} size="2x" />
-        </a>
-        <a
-          href="https://wa.me/628152317003?text=Hi%20there%21%20I%20came%20across%20your%20website%20and%20I%27m%20interested%20in%20learning%20more%20about%20your%20services.%20Looking%20forward%20to%20hearing%20from%20you%21%0A"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="icon whatsapp"
-          title="WhatsApp: Chat with me"
-        >
-          <FontAwesomeIcon icon={faWhatsapp} size="2x" />
-        </a>
+        {profile.social?.github && (
+          <a
+            href={profile.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon github"
+            title="GitHub: Check out my projects"
+          >
+            <FontAwesomeIcon icon={faGithub} size="2x" />
+          </a>
+        )}
+        {profile.social?.linkedin && (
+          <a
+            href={profile.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon linkedin"
+            title="LinkedIn: Let's connect professionally"
+          >
+            <FontAwesomeIcon icon={faLinkedin} size="2x" />
+          </a>
+        )}
+        {profile.social?.whatsapp && (
+          <a
+            href={profile.social.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon whatsapp"
+            title="WhatsApp: Chat with me"
+          >
+            <FontAwesomeIcon icon={faWhatsapp} size="2x" />
+          </a>
+        )}
       </div>
     </div>
   );
