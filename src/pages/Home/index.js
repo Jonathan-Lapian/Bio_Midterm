@@ -56,15 +56,15 @@ const Home = () => {
           <Fade>
             <div className="stats">
               <div>
-                <h3>6+</h3>
+                <h3>{profile.client}+</h3>
                 <p>Happy Clients</p>
               </div>
               <div>
-                <h3>10</h3>
+                <h3>{profile.project}</h3>
                 <p>Projects</p>
               </div>
               <div>
-                <h3>2</h3>
+                <h3>{profile.certi}</h3>
                 <p>Certificates</p>
               </div>
             </div>
