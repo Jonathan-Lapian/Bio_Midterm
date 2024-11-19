@@ -1,28 +1,22 @@
-import React from "react";
-import "./OrganizationExperience.css"; // Include CSS for styling
+import React, { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
+import "./OrganizationExperience.css";
 
 const OrganizationalExperience = () => {
-  // Define experiences directly in the component
-  const experiences = [
-    {
-      year: "2024 ",
-      organization: "Crew BEW 2024",
-      position: "Member of EDITOR GEMA",
-      details: [
-        "Helping offices to edit the event that BEM held.",
-        "Became one of the committee CAMPUS DAY.",
-      ],
-    },
-    {
-      year: "2024 - Present ",
-      organization: "The Unklab Choir",
-      position: "Member of Multimedia ",
-      details: [
-        "Helping them with documentary and editing their videos.",
-        "Organizing their videos for anniversary.",
-      ],
-    },
-  ];
+  const [experiences, setExperiences] = useState([]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const orgRef = ref(db, "organizationalExperience");
+
+    onValue(orgRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setExperiences(snapshot.val());
+      } else {
+        console.error("No organizational experience data found.");
+      }
+    });
+  }, []);
 
   return (
     <div className="organizational-experience">

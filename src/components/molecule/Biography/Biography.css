@@ -1,0 +1,19 @@
+.biography-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.section-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.biography-paragraph {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin: -10px 0;
+  text-align: justify;
+}

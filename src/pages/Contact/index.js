@@ -14,7 +14,7 @@ const Contact = () => {
 
   useEffect(() => {
     const db = getDatabase();
-    const profileRef = ref(db, "profile"); // Fetching from the 'profile' node
+    const profileRef = ref(db, "profile");
 
     onValue(profileRef, (snapshot) => {
       if (snapshot.exists()) {

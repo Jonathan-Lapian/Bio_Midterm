@@ -1,16 +1,46 @@
-import React from "react";
-import Foto from "./foto.jpg";
+import React, { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { Fade, Slide } from "react-awesome-reveal";
 import "./Home.css";
-import "../pages.css";
 
 const Home = () => {
+  const [profile, setProfile] = useState(null); // For profile data
+  const [loading, setLoading] = useState(true); // For global loading
+
+  useEffect(() => {
+    const db = getDatabase();
+    const profileRef = ref(db, "profile");
+
+    onValue(profileRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setProfile(snapshot.val());
+        setLoading(false); // Stop loading once data is fetched
+      } else {
+        console.error("No profile data found in database.");
+      }
+    });
+  }, []);
+
+  if (loading) {
+    // Display global loading screen while fetching data
+    return (
+      <div className="loading-screen">
+        <div className="spinner"></div>
+        <p>Loading data...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Fade>
         <Slide duration={800}>
           <div className="image-section">
-            <img src={Foto} alt="Jonathan Lapian" className="image" />
+            <img
+              src={`data:image/jpg;base64,${profile.pic}`}
+              alt={`${profile.name}'s profile`}
+              className="image"
+            />
           </div>
         </Slide>
       </Fade>
@@ -18,8 +48,8 @@ const Home = () => {
         <Fade>
           <Slide direction="right">
             <h2>Hi There</h2>
-            <h1>I'm Jonathan Lapian</h1>
-            <p>Scholar that was from Universitas Klabat, Indonesia.</p>
+            <h1>I'm {profile?.name || "Loading Name..."}</h1>
+            <p>Scholar from Universitas Klabat, Indonesia.</p>
           </Slide>
         </Fade>
         <Slide direction="up">
@@ -35,7 +65,7 @@ const Home = () => {
               </div>
               <div>
                 <h3>2</h3>
-                <p>Certificate</p>
+                <p>Certificates</p>
               </div>
             </div>
           </Fade>

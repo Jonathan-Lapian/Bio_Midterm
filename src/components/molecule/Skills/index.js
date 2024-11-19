@@ -1,31 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import "./Skills.css";
 
 const Skills = () => {
+  const [skills, setSkills] = useState({ coreSkills: [], otherSkills: [] });
+
+  useEffect(() => {
+    const db = getDatabase();
+    const skillsRef = ref(db, "skills");
+
+    onValue(skillsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setSkills(snapshot.val());
+      } else {
+        console.error("No skills data found.");
+      }
+    });
+  }, []);
+
   return (
     <div className="skills-container">
       <div className="skills-section">
         <h3>Core Skills</h3>
         <div className="skills-list">
-          <span className="skill-badge">JavaScript</span>
-          <span className="skill-badge">Python</span>
-          <span className="skill-badge">React</span>
-          <span className="skill-badge">React Native</span>
-          <span className="skill-badge">HTML</span>
-          <span className="skill-badge">CSS</span>
-          <span className="skill-badge">GitHub</span>
+          {skills.coreSkills.map((skill, index) => (
+            <span key={index} className="skill-badge">
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
 
       <div className="skills-section">
         <h3>Other Skills</h3>
         <div className="skills-list">
-          <span className="skill-badge">Graphic Design</span>
-          <span className="skill-badge">Photo Editing</span>
-          <span className="skill-badge">Video Editing</span>
-          <span className="skill-badge">Journal Entries(Accounting)</span>
-          <span className="skill-badge">Microsoft Word</span>
-          <span className="skill-badge">Microsoft PowerPoint</span>
+          {skills.otherSkills.map((skill, index) => (
+            <span key={index} className="skill-badge">
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
     </div>
