@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import FirebaseData from "../../hooks/firebaseData";
+import axios from "axios";
 
-const Git = () => {
+const Git = ({ link }) => {
   const { profile } = FirebaseData();
   const [repoCount, setRepoCount] = useState(null);
 
   useEffect(() => {
     const fetchRepoCount = async () => {
       try {
-        // Extract GitHub username from the profile data
         const gitLink = profile?.social?.github || ""; // Adjust if `social` structure differs
-        const username = gitLink.split("/").filter(Boolean).pop();
-
+        const username = gitLink.split("/").filter(Boolean).pop(); // Extract username from the link
         if (!username) {
           throw new Error("Invalid GitHub URL");
         }
-
         // Fetch repository data from GitHub API
         const response = await axios.get(
           `https://api.github.com/users/${username}/repos`
@@ -27,13 +24,12 @@ const Git = () => {
         setRepoCount(0); // Default to 0 in case of an error
       }
     };
-
     if (profile?.social?.github) {
       fetchRepoCount();
     }
   }, [profile]);
 
-  return <span>{repoCount !== null ? repoCount : "Loading..."}</span>;
+  return <>{repoCount}</>; // Return the repo count as a number
 };
 
 export default Git;

@@ -2,11 +2,11 @@ import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
 import Git from "../../components/atoms/github";
 import FirebaseData from "../../components/hooks/firebaseData";
+import AnimatedCounter from "../../config/animationCount";
 import "./Home.css";
 
 const Home = () => {
   const { profile, loading } = FirebaseData();
-
   if (loading) {
     return (
       <div className="loading-screen">
@@ -41,7 +41,9 @@ const Home = () => {
           <Fade>
             <div className="stats">
               <div>
-                <h3>{profile.client}+</h3>
+                <h3>
+                  <AnimatedCounter targetValue={profile.client} />+
+                </h3>
                 <p>Happy Clients</p>
               </div>
               <div>
@@ -51,7 +53,9 @@ const Home = () => {
                 <p>Projects</p>
               </div>
               <div>
-                <h3>{profile.certi}</h3>
+                <h3>
+                  <AnimatedCounter targetValue={profile.certi} />
+                </h3>
                 <p>Certificates</p>
               </div>
             </div>

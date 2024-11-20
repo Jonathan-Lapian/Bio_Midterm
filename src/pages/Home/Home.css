@@ -17,13 +17,14 @@
 .image {
   width: 400px;
   height: 600px;
+  margin-right: 50px;
   border-radius: 10px;
   border: 2px solid;
   border-bottom: 10px solid;
   border-left: 10px solid;
   border-top-left-radius: 100px;
   border-bottom-left-radius: 50px;
-  border-color: rgba(61, 100, 135, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .text-section {
@@ -34,7 +35,10 @@
 .stats {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 70px;
+}
+.stats h3 {
+  font-size: 20px;
 }
 
 .stats div {
