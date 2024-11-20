@@ -1,43 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import React from "react";
+import FirebaseData from "../../hooks/firebaseData";
 import "./Skills.css";
 
 const Skills = () => {
-  const [skills, setSkills] = useState({ coreSkills: [], otherSkills: [] });
+  const { profile, loading } = FirebaseData();
 
-  useEffect(() => {
-    const db = getDatabase();
-    const skillsRef = ref(db, "skills");
+  if (loading) {
+    return <p>Loading skills...</p>;
+  }
 
-    onValue(skillsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setSkills(snapshot.val());
-      } else {
-        console.error("No skills data found.");
-      }
-    });
-  }, []);
+  const coreSkills = profile?.skills?.coreSkills || [];
+  const otherSkills = profile?.skills?.otherSkills || [];
 
   return (
     <div className="skills-container">
+      {/* Core Skills Section */}
       <div className="skills-section">
         <h3>Core Skills</h3>
         <div className="skills-list">
-          {skills.coreSkills.map((skill, index) => (
-            <span key={index} className="skill-badge">
+          {coreSkills.map((skill, index) => (
+            <div key={index} className="skill-badge">
               {skill}
-            </span>
+            </div>
           ))}
         </div>
       </div>
 
+      {/* Other Skills Section */}
       <div className="skills-section">
         <h3>Other Skills</h3>
         <div className="skills-list">
-          {skills.otherSkills.map((skill, index) => (
-            <span key={index} className="skill-badge">
+          {otherSkills.map((skill, index) => (
+            <div key={index} className="skill-badge">
               {skill}
-            </span>
+            </div>
           ))}
         </div>
       </div>

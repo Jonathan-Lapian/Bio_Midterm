@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import React from "react";
+import FirebaseData from "../hooks/firebaseData";
 import "./OrganizationExperience.css";
 
 const OrganizationalExperience = () => {
-  const [experiences, setExperiences] = useState([]);
+  const { profile, loading } = FirebaseData();
 
-  useEffect(() => {
-    const db = getDatabase();
-    const orgRef = ref(db, "organizationalExperience");
+  if (loading) {
+    return <p>Loading organizational experience...</p>;
+  }
 
-    onValue(orgRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setExperiences(snapshot.val());
-      } else {
-        console.error("No organizational experience data found.");
-      }
-    });
-  }, []);
+  const experiences = profile?.organizationalExperience || [];
 
   return (
     <div className="organizational-experience">

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import React from "react";
 import "./Contact.css";
+import FirebaseData from "../../components/hooks/firebaseData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedin,
@@ -9,26 +9,12 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Contact = () => {
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const db = getDatabase();
-    const profileRef = ref(db, "profile");
-
-    onValue(profileRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setProfile(snapshot.val());
-      } else {
-        console.error("No profile data found in database.");
-      }
-      setLoading(false);
-    });
-  }, []);
-
+  const { profile, loading } = FirebaseData();
   if (loading) {
-    return <p>Loading profile details...</p>;
+    return <p>Loading biography...</p>;
   }
+
+  const contact = profile.social || [];
 
   return (
     <div className="contact-container">
@@ -38,9 +24,9 @@ const Contact = () => {
         Feel free to connect with me through the platforms below!
       </p>
       <div className="icon-container">
-        {profile.social?.github && (
+        {contact?.github && (
           <a
-            href={profile.social.github}
+            href={contact.github}
             target="_blank"
             rel="noopener noreferrer"
             className="icon github"
@@ -49,9 +35,9 @@ const Contact = () => {
             <FontAwesomeIcon icon={faGithub} size="2x" />
           </a>
         )}
-        {profile.social?.linkedin && (
+        {contact?.linkedin && (
           <a
-            href={profile.social.linkedin}
+            href={contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="icon linkedin"
@@ -60,9 +46,9 @@ const Contact = () => {
             <FontAwesomeIcon icon={faLinkedin} size="2x" />
           </a>
         )}
-        {profile.social?.whatsapp && (
+        {contact?.whatsapp && (
           <a
-            href={profile.social.whatsapp}
+            href={contact.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="icon whatsapp"

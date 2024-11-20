@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
+import Git from "../../components/atoms/github";
+import FirebaseData from "../../components/hooks/firebaseData";
 import "./Home.css";
 
 const Home = () => {
-  const [profile, setProfile] = useState(null); // For profile data
-  const [loading, setLoading] = useState(true); // For global loading
-
-  useEffect(() => {
-    const db = getDatabase();
-    const profileRef = ref(db, "profile");
-
-    onValue(profileRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setProfile(snapshot.val());
-        setLoading(false); // Stop loading once data is fetched
-      } else {
-        console.error("No profile data found in database.");
-      }
-    });
-  }, []);
+  const { profile, loading } = FirebaseData();
 
   if (loading) {
-    // Display global loading screen while fetching data
     return (
       <div className="loading-screen">
         <div className="spinner"></div>
@@ -60,7 +45,9 @@ const Home = () => {
                 <p>Happy Clients</p>
               </div>
               <div>
-                <h3>{profile.project}</h3>
+                <h3>
+                  <Git />
+                </h3>
                 <p>Projects</p>
               </div>
               <div>

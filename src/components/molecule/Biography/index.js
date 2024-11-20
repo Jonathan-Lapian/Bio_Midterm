@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import React from "react";
+import FirebaseData from "../../hooks/firebaseData";
 import "./Biography.css";
 
 const Biography = () => {
-  const [biography, setBiography] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const db = getDatabase();
-    const profileRef = ref(db, "profile");
-
-    onValue(profileRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        setBiography(data.biography || []); // Fallback to empty array if biography is missing
-        setLoading(false);
-      } else {
-        console.error("No profile data found in database.");
-      }
-    });
-  }, []);
+  const { profile, loading } = FirebaseData();
 
   if (loading) {
     return <p>Loading biography...</p>;
   }
+
+  const biography = profile.biography || [];
 
   return (
     <div className="biography-section">
