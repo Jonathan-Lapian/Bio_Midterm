@@ -1,12 +1,13 @@
 import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
-import Git from "../../components/atoms/github";
+import Git from "../../components/atoms/githubFetch";
 import FirebaseData from "../../components/hooks/firebaseData";
 import AnimatedCounter from "../../config/animationCount";
 import "./Home.css";
 
 const Home = () => {
   const { profile, loading } = FirebaseData();
+  const repoCount = Git();
   if (loading) {
     return (
       <div className="loading-screen">
@@ -48,7 +49,7 @@ const Home = () => {
               </div>
               <div>
                 <h3>
-                  <Git />
+                  <AnimatedCounter targetValue={repoCount} />
                 </h3>
                 <p>Projects</p>
               </div>
