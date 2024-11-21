@@ -12,10 +12,10 @@ const App = () => {
   };
 
   return (
-    <>
+    <div>
       <Header onNavClick={goToSlide} />
       <Body className="slider-container" sliderRef={sliderRef} />
-    </>
+    </div>
   );
 };
 

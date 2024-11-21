@@ -1,6 +1,6 @@
 import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
-import Git from "../../components/atoms/githubFetch";
+import Git from "../../components/atoms/github";
 import FirebaseData from "../../components/hooks/firebaseData";
 import AnimatedCounter from "../../config/animationCount";
 import "./Home.css";

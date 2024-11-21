@@ -5,6 +5,10 @@ html,
   padding: 0;
   height: 90%;
 }
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("../public/PTSerif-Bold.ttf") format("woff2");
+}
 
 .slider-container {
   height: 90vh; /* Full viewport height */
